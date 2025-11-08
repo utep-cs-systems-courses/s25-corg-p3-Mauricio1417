@@ -1,0 +1,33 @@
+#include <msp430.h>
+#include "libTimer.h"
+
+#define LED_RED BIT0               // P1.0
+#define LED_GREEN BIT6             // P1.6
+#define LEDS (LED_RED | LED_GREEN)
+
+#define SW1 BIT0                /* switch1 is p1.3 */
+#define SW2 BIT1
+#define SW3 BIT2
+#define SW4 BIT3
+#define SWITCHES (SW1 | SW2| SW3 | SW4)
+
+void switch_init() {
+  P2REN |= SWITCHES;
+  P2IE |= SWITCHES;
+  P2OUT |= SWITCHES;
+  P2DIR &= ~SWITCHES;
+}
+
+void leds_init() {
+  P1DIR |= LEDS;
+  P1OUT &= ~LEDS;
+}
+
+void wdt_init() {
+  configureClocks();
+  enableWDTInterrupts();
+}
+
+void main(void) {
+  int x = 0;
+}
